@@ -50,7 +50,7 @@
 		<div class="card mb-3">
 			<div class="card-body">
 				<h5 class="card-title">Tarefa 2</h5>
-				<p class="card-text text-muted"></p>
+				<p class="card-text text-muted">Prazo: 30 mai</p>
 			</div>
 			<div class="card-footer text-right">
 				
@@ -63,6 +63,33 @@
 						Excluir
 					</button>
 					<button type="submit" name="acao" value="concluir" class="btn btn-primary">
+						<span class="oi oi-check" title="trash"></span>
+						Concluir
+					</button>
+
+				</form>
+
+			</div>
+		</div>
+
+		<div class="card mb-3">
+			<div class="card-body">
+				<h5 class="card-title">
+					<del>Tarefa 3</del>
+				</h5>
+				<p class="card-text text-muted"></p>
+			</div>
+			<div class="card-footer text-right">
+				
+				<form action="index.php" method="post">
+
+					<!-- dica: colocar um input hidden aqui -->
+
+					<button type="submit" name="acao" value="excluir" class="btn btn-link btn-excluir">
+						<span class="oi oi-trash" title="trash"></span>
+						Excluir
+					</button>
+					<button type="submit" name="acao" value="concluir" class="btn btn-outline-primary" disabled>
 						<span class="oi oi-check" title="trash"></span>
 						Concluir
 					</button>
