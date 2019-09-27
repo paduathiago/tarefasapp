@@ -1,3 +1,17 @@
+<?php
+	require ('funcoes.php');
+	if (!empty($_POST['acao'])) 
+	{
+		if ($_POST['acao'] == "excluir")
+		{
+			deletaritem($_POST['id']);
+		}
+		header("Location: index.php");
+	}
+
+	$itens = buscaritens();	
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,17 +36,17 @@
 
 		<!-- lista de tarefas cadastradas -->
 
-		<div class="card mb-3">
+		<?php foreach ($itens as $i ): ?>
+			<div class="card mb-3">
 			<div class="card-body">
-				<h5 class="card-title">Tarefa 1</h5>
-				<p class="card-text text-muted">Prazo: 2 jun</p>
+				<h5 class="card-title"><?= $i['nome'] ?></h5>
+				<p class="card-text text-muted">Prazo: <?= $i['prazo'] ?></p>
 			</div>
 			<div class="card-footer text-right">
 				
 				<form action="index.php" method="post">
-
 					<!-- dica: colocar um input hidden aqui -->
-
+					<input type="hidden" name="id" value="<?= $i['codigo'] ?>">
 					<button type="submit" name="acao" value="excluir" class="btn btn-link btn-excluir">
 						<span class="oi oi-trash" title="trash"></span>
 						Excluir
@@ -41,62 +55,15 @@
 						<span class="oi oi-check" title="trash"></span>
 						Concluir
 					</button>
-
 				</form>
-
 			</div>
 		</div>
+		<?php endforeach; ?>
+		
 
-		<div class="card mb-3">
-			<div class="card-body">
-				<h5 class="card-title">Tarefa 2</h5>
-				<p class="card-text text-muted">Prazo: 30 mai</p>
-			</div>
-			<div class="card-footer text-right">
-				
-				<form action="index.php" method="post">
 
-					<!-- dica: colocar um input hidden aqui -->
 
-					<button type="submit" name="acao" value="excluir" class="btn btn-link btn-excluir">
-						<span class="oi oi-trash" title="trash"></span>
-						Excluir
-					</button>
-					<button type="submit" name="acao" value="concluir" class="btn btn-primary">
-						<span class="oi oi-check" title="trash"></span>
-						Concluir
-					</button>
-
-				</form>
-
-			</div>
-		</div>
-
-		<div class="card mb-3">
-			<div class="card-body">
-				<h5 class="card-title">
-					<del>Tarefa 3</del>
-				</h5>
-				<p class="card-text text-muted"></p>
-			</div>
-			<div class="card-footer text-right">
-				
-				<form action="index.php" method="post">
-
-					<!-- dica: colocar um input hidden aqui -->
-
-					<button type="submit" name="acao" value="excluir" class="btn btn-link btn-excluir">
-						<span class="oi oi-trash" title="trash"></span>
-						Excluir
-					</button>
-					<button type="submit" name="acao" value="concluir" class="btn btn-outline-primary" disabled>
-						<span class="oi oi-check" title="trash"></span>
-						Concluir
-					</button>
-
-				</form>
-
-		</div>
+		
 
 
 		<!-- botao flutuante -->
