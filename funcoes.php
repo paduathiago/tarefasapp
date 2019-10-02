@@ -27,4 +27,26 @@
 				]
 			);
 	}
+	function adicionaritem($nome,$prazo)
+	{
+		$conexao = criarConexao();
+		$sql = "INSERT INTO item values (null,?,?,0)";
+		$comando = $conexao->prepare($sql);
+		return $comando->execute(
+				[
+					$nome,$prazo
+				]
+			);
+	}
+	function Concluiritem($id)
+	{
+		$conexao = criarConexao();
+		$sql = "UPDATE item SET concluida=1  WHERE codigo = ?";
+		$comando = $conexao->prepare($sql);
+		return $comando->execute(
+				[
+					$id
+				]
+			);
+	}
 ?>

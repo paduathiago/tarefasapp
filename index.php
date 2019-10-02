@@ -6,6 +6,14 @@
 		{
 			deletaritem($_POST['id']);
 		}
+		else if ($_POST['acao'] == "adicionar")
+		{
+			adicionaritem($_POST['nome'],$_POST['prazo']);
+		}
+		else if ($_POST['acao'] == "concluir")
+		{
+			Concluiritem($_POST['id']);
+		}
 		header("Location: index.php");
 	}
 
@@ -39,7 +47,16 @@
 		<?php foreach ($itens as $i ): ?>
 			<div class="card mb-3">
 			<div class="card-body">
-				<h5 class="card-title"><?= $i['nome'] ?></h5>
+				<h5 class="card-title">
+				<?php if($i['concluida']==1): ?>
+
+					<del><?=$i['nome']?></del>
+				
+				<?php else:?>
+					<?=$i['nome']?>
+				<?php endif; ?>
+
+				</h5>
 				<p class="card-text text-muted">Prazo: <?= $i['prazo'] ?></p>
 			</div>
 			<div class="card-footer text-right">
@@ -51,7 +68,10 @@
 						<span class="oi oi-trash" title="trash"></span>
 						Excluir
 					</button>
-					<button type="submit" name="acao" value="concluir" class="btn btn-primary">
+					<button type="submit" name="acao" value="concluir" class="btn btn-primary" 
+					<?php if($i['concluida']==1):?>
+						disabled
+					<?php endif; ?>>
 						<span class="oi oi-check" title="trash"></span>
 						Concluir
 					</button>
@@ -85,7 +105,7 @@
 					<div class="modal-body">
 						<form id="frm-tarefa" action="index.php" method="post">
 							<div class="form-group">
-								<label for="descricao">* Descrição</label><input type="text" id="descricao" class="form-control" name="descricao" autofocus required>
+								<label for="descricao">* Descrição</label><input type="text" id="nome" class="form-control" name="nome" autofocus required>
 							</div>
 							<div class="form-group">
 								<label for="prazo">Prazo</label><input type="date" class="form-control" id="prazo" name="prazo">
